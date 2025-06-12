@@ -1,0 +1,4 @@
+python -m venv myenv
+myenv\Scripts\activate
+python your_script.py
+deactivate
