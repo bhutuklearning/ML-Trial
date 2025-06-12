@@ -1,4 +1,5 @@
 python -m venv myenv
 myenv\Scripts\activate
-python your_script.py
+pip install streamlit pandas numpy scikit-learn matplotlib
+streamlit run app.py
 deactivate
