@@ -2,10 +2,15 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from sklearn.metrics import r2_score
+# from sklearn.metrics import r2_score
 from mpl_toolkits.mplot3d import Axes3D
 
 st.set_page_config(page_title="House Price Predictor", layout="wide")
+
+def r2_score_manual(y_true, y_pred):
+    ss_res = np.sum((y_true - y_pred) ** 2)
+    ss_tot = np.sum((y_true - np.mean(y_true)) ** 2)
+    return 1 - ss_res / ss_tot
 
 # Load data
 df = pd.read_csv("expanded_house_price_dataset.csv")
@@ -39,7 +44,8 @@ for _ in range(epochs):
 # Final predictions and evaluation
 y_final_pred = weight * X + bias
 final_loss = np.mean((y_final_pred - y) ** 2)
-r2 = r2_score(y, y_final_pred)
+r2 = r2_score_manual(y, y_final_pred)
+
 
 # 🧠 Sidebar for Prediction
 st.sidebar.header("🏠 Predict House Price")
